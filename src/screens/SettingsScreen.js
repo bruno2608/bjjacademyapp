@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
-import * as SecureStore from 'expo-secure-store'; // Para armazenar preferências do usuário de forma segura
+import * as SecureStore from 'expo-secure-store';
 
 const SettingsScreen = () => {
   const theme = useTheme();
   const [isDarkMode, setIsDarkMode] = useState(theme === 'dark');
 
   useEffect(() => {
-    // Carregar o tema preferido ao iniciar o app
     const loadThemePreference = async () => {
       const savedTheme = await SecureStore.getItemAsync('theme');
       if (savedTheme) {
@@ -21,15 +20,13 @@ const SettingsScreen = () => {
   }, []);
 
   const toggleTheme = async () => {
-    // Alternar o estado do tema
     const newTheme = isDarkMode ? 'light' : 'dark';
     setIsDarkMode(!isDarkMode);
-
-    // Salvar a preferência do tema no SecureStore
     await SecureStore.setItemAsync('theme', newTheme);
+  };
 
-    // Aqui você pode alterar o app.json para forçar a mudança de tema, mas o expo não permite
-    // alterar o app.json diretamente em tempo de execução. O modo automático é a melhor opção.
+  const handleLogoutPress = () => {
+    Alert.alert('Sair da Conta', 'A funcionalidade ainda não está disponível.');
   };
 
   return (
@@ -48,6 +45,11 @@ const SettingsScreen = () => {
         <Text style={[styles.buttonText, { color: theme.text }]}>
           {isDarkMode ? 'Modo Escuro' : 'Modo Claro'}
         </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleLogoutPress} style={styles.logoutButton}>
+        <Ionicons name="log-out-outline" size={28} color="red" />
+        <Text style={styles.logoutText}>Sair da Conta</Text>
       </TouchableOpacity>
     </View>
   );
@@ -76,6 +78,16 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
+    marginLeft: 8,
+  },
+  logoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 40,
+  },
+  logoutText: {
+    fontSize: 16,
+    color: 'red',
     marginLeft: 8,
   },
 });
