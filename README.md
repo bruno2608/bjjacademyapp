@@ -23,7 +23,7 @@
 
 ## 🚀 Tecnologias
 
-- ⚛️ **React** – Interface moderna e responsiva
+- ⚛️ **React Native** – Interface moderna e responsiva
 - 🔐 **Supabase** – Autenticação e banco de dados PostgreSQL
 - 📦 **Context API** – Gerenciamento global de autenticação
 - 🧱 **Componentização** – Arquitetura organizada com componentes reutilizáveis
@@ -35,8 +35,7 @@
 
 No momento, o projeto está em fase inicial de desenvolvimento. Já implementamos:
 
-- ✅ **Login com e-mail e senha** (autenticação conectada ao Supabase)
-- ✅ **Estrutura base com React + Supabase**
+- ✅ **Navbar** (autenticação conectada ao Supabase)
 - ✅ **Algumas telas iniciais para testes de UI**
 
 > ⚠️ Nesta versão `v0.0.1`, o foco está na estruturação da base do sistema de autenticação.
@@ -47,7 +46,7 @@ No momento, o projeto está em fase inicial de desenvolvimento. Já implementamo
 
 Nesta fase, estamos trabalhando nas seguintes funcionalidades essenciais:
 
-- [x] Tela de login
+- [ ] Tela de login
 - [ ] Tela de cadastro de usuário (instrutores/alunos)
 - [ ] Tela de redefinição de senha
 - [ ] Validação de sessão ativa (usuário logado permanece conectado)
@@ -99,58 +98,38 @@ npm run eject     # Expõe configurações internas (irreversível)
 ## 📁 Estrutura de Diretórios
 
 ```
-BJJ-ACADEMY/
-│
-├── node_modules/              # Dependências instaladas via npm
-│
-├── public/                    # Arquivos públicos acessíveis diretamente pelo navegador
-│
-├── src/                       # Diretório principal de código-fonte da aplicação
-│   ├── assets/                # Recursos estáticos da aplicação
-│   │   ├── icons/             # Ícones utilizados na UI
-│   │   └── images/            # Imagens usadas na aplicação
-│   │
-│   ├── components/            # Componentes reutilizáveis da interface
-│   │   ├── common/            # Componentes genéricos (botões, inputs, etc)
-│   │   ├── features/          # Componentes voltados para funcionalidades específicas
-│   │   └── layout/            # Componentes relacionados ao layout (navbar, footer, etc)
-│   │
-│   ├── contexts/              # Contextos React para gerenciamento de estado global
-│   │   └── AuthContext.js     # Contexto de autenticação do usuário
-│   │
-│   ├── hooks/                 # Hooks customizados React
-│
-│   ├── models/                # Modelos de dados utilizados no frontend
-│   │   └── userModel.js       # Modelo de dados para o usuário
-│
-│   ├── services/              # Serviços de integração com APIs ou back-end
-│   │   ├── authService.js     # Lógica de autenticação
-│   │   └── supabaseClient.js  # Instância do cliente Supabase
-│
-│   ├── utils/                 # Funções utilitárias auxiliares
-│
-│   ├── views/                 # Páginas principais da aplicação
-│   │   ├── HomeView.js        # Página inicial
-│   │   ├── LoginView.js       # Página de login
-│   │   └── RegisterView.js    # Página de cadastro
-│
-│   ├── App.css                # Estilos globais da aplicação
-│   ├── App.js                 # Componente raiz da aplicação
-│   ├── App.test.js            # Testes da aplicação
-│   ├── index.css              # Estilos da página index
-│   ├── index.js               # Ponto de entrada principal (renderização do React)
-│   ├── logo.svg               # Logo da aplicação
-│   ├── reportWebVitals.js     # Medição de performance (opcional)
-│   ├── routes.js              # Definição das rotas da aplicação
-│   └── setupTests.js          # Configuração para testes
-│
-├── .gitattributes             # Configurações específicas do Git
-├── .gitignore                 # Arquivos/diretórios ignorados pelo Git
-├── package.json               # Dependências e scripts do projeto
-├── package-lock.json          # Versões exatas das dependências instaladas
-├── README.md                  # Documentação principal do projeto
-└── README.old.md              # Versão anterior do README (backup ou histórico)
-
+BJJACADEMYAPP/
+├── .expo/                  # Configurações do Expo
+├── .vscode/                # Configurações do VSCode
+├── assets/                 # Arquivos estáticos (imagens, fontes, etc)
+├── node_modules/           # Dependências do projeto
+├── src/                    # Código-fonte principal
+│   ├── components/         # Componentes reutilizáveis
+│   │   └── Header.js
+│   ├── contexts/           # Context API (Gerenciamento de tema, autenticação, etc)
+│   │   └── ThemeContext.js
+│   ├── hooks/              # Custom Hooks
+│   │   └── useThemeColors.js
+│   ├── navigation/         # Configurações de navegação
+│   │   └── AppNavigator.js
+│   ├── screens/            # Telas principais do app
+│   │   ├── CheckinScreen.js
+│   │   ├── DetailScreen.js
+│   │   ├── EvolucaoScreen.js
+│   │   ├── HomeScreen.js
+│   │   ├── PresencaScreen.js
+│   │   └── SettingsScreen.js
+│   ├── themes/             # Sistema de temas (cores, estilos)
+│   │   └── index.js
+├── .gitignore              # Arquivos ignorados pelo Git
+├── App.js                  # Ponto de entrada da aplicação
+├── app.json                # Configuração do projeto (Expo)
+├── index.js                # Entry point (usado para web/native)
+├── LICENSE                 # Licença do projeto
+├── package.json            # Dependências e scripts do projeto
+├── package-lock.json       # Lockfile do npm
+├── README.md               # Documentação do projeto
+└── yarn.lock               # Lockfile do yarn
 ```
 
 ---
