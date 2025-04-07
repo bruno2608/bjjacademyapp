@@ -1,3 +1,4 @@
+// src/screens/LoginScreen.js
 import React, { useState } from 'react';
 import {
   View,
@@ -12,39 +13,35 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { supabase } from '../services/supabaseClient';
 import { useTheme } from '../contexts/ThemeContext';
-import { useUsuario } from '../contexts/UserContext';
 
 const LoginScreen = () => {
   const theme = useTheme();
   const styles = getStyles(theme);
-  const { setUsuario } = useUsuario();
   const navigation = useNavigation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleLogin = async () => {
     setLoading(true);
     setError('');
+    setSuccessMessage('');
+
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
       setError(error.message);
     } else {
-      const { data: usuario } = await supabase
-        .from('usuarios')
-        .select('*')
-        .eq('auth_id', supabase.auth.user().id)
-        .single();
-
-      setUsuario(usuario);
-
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Home' }],
-      });
+      setSuccessMessage('Login realizado com sucesso!');
+      setTimeout(() => {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MainTabs' }],
+        });
+      }, 1500);
     }
 
     setLoading(false);
@@ -82,15 +79,15 @@ const LoginScreen = () => {
         />
 
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
+        {successMessage ? <Text style={styles.successText}>{successMessage}</Text> : null}
 
         <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
-        {loading ? (
+          {loading ? (
             <ActivityIndicator color="#fff" />
-        ) : (
-            <Text style={styles.buttonText}>Entrar</Text> 
-        )}
+          ) : (
+            <Text style={styles.buttonText}>Entrar</Text>
+          )}
         </TouchableOpacity>
-
       </View>
     </KeyboardAvoidingView>
   );
@@ -145,6 +142,12 @@ const getStyles = (theme) => ({
     fontSize: 13,
     textAlign: 'center',
     marginTop: -8,
+  },
+  successText: {
+    color: 'green',
+    fontSize: 13,
+    textAlign: 'center',
+    marginTop: 8,
   },
 });
 
