@@ -1,4 +1,3 @@
-
 <div align="center">
   <img src="https://i.imgur.com/WdGink9.png" alt="Logo do BJJ Academy" width="220" />
 
@@ -173,4 +172,4 @@ Entre em contato para uso comercial ou autorização: [contatobalvesfranca@gmail
 
 Feito com 💙 por [Bruno Alves Franca](https://github.com/balvesfranca)  
 📸 Instagram: [@balvesfranca](https://instagram.com/balvesfranca)
-    
+```
