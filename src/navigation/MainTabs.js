@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTheme } from '../contexts/ThemeContext';
 
-// Importação das telas – crie stubs se ainda não existirem
 import HomeScreen from '../screens/HomeScreen';
 import PresencaScreen from '../screens/PresencaScreen';
 import CheckinScreen from '../screens/CheckinScreen';

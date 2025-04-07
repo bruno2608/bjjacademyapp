@@ -30,17 +30,16 @@ const LoginScreen = () => {
     setError('');
     setSuccessMessage('');
 
+    // Faz login no Supabase
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
       setError(error.message);
     } else {
       setSuccessMessage('Login realizado com sucesso!');
+      // Aguarda 1.5 segundo para exibir a mensagem e então vai para a tela de sucesso
       setTimeout(() => {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'MainTabs' }],
-        });
+        navigation.replace('Success');
       }, 1500);
     }
 
@@ -48,10 +47,13 @@ const LoginScreen = () => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
       <View style={styles.logoArea}>
         <Image
-          source={{ uri: 'https://i.imgur.com/WdGink9.png' }}
+          source={{ uri: 'https://i.imgur.com/WdGink9.png' }} // Ajuste o link se precisar
           style={styles.logoImage}
           resizeMode="contain"
         />
