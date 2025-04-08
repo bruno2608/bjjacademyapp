@@ -23,22 +23,19 @@ const MainTabs = () => {
         tabBarActiveTintColor: theme.text,
         tabBarInactiveTintColor: theme.subtext,
         tabBarIcon: ({ color, size, focused }) => {
-          if (route.name === 'Home') {
-            return <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />;
-          } else if (route.name === 'Presença') {
-            return <Ionicons name={focused ? 'book' : 'book-outline'} size={size} color={color} />;
-          } else if (route.name === 'Check-in') {
-            return (
-              <MaterialCommunityIcons
-                name={focused ? 'clipboard-check' : 'clipboard-check-outline'}
-                size={size}
-                color={color}
-              />
-            );
-          } else if (route.name === 'Evolução') {
-            return <Ionicons name={focused ? 'medal' : 'medal-outline'} size={size} color={color} />;
-          } else if (route.name === 'Configurações') {
-            return <Ionicons name={focused ? 'settings' : 'settings-outline'} size={size} color={color} />;
+          switch (route.name) {
+            case 'Home':
+              return <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />;
+            case 'Presença':
+              return <Ionicons name={focused ? 'book' : 'book-outline'} size={size} color={color} />;
+            case 'Check-in':
+              return <MaterialCommunityIcons name={focused ? 'clipboard-check' : 'clipboard-check-outline'} size={size} color={color} />;
+            case 'Evolução':
+              return <Ionicons name={focused ? 'medal' : 'medal-outline'} size={size} color={color} />;
+            case 'Configurações':
+              return <Ionicons name={focused ? 'settings' : 'settings-outline'} size={size} color={color} />;
+            default:
+              return null;
           }
         },
       })}

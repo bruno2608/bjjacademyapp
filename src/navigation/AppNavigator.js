@@ -1,9 +1,9 @@
 // src/navigation/AppNavigator.js
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useUsuario } from '../contexts/UserContext';
 import AuthStack from './AuthStack';
 import MainTabs from './MainTabs';
+import { useUsuario } from '../contexts/UserContext';
 
 const Stack = createStackNavigator();
 

@@ -1,16 +1,16 @@
+// src/screens/SettingsScreen.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
-import { useNavigation } from '@react-navigation/native';
-import { supabase } from '../services/supabaseClient';
+import { logout } from '../services/authService';
+import { useUsuario } from '../contexts/UserContext';
 
 const SettingsScreen = () => {
   const theme = useTheme();
   const styles = getStyles(theme);
-  const navigation = useNavigation();
-
+  const { setUsuario } = useUsuario();
   const [isDarkMode, setIsDarkMode] = useState(theme.mode === 'dark');
 
   useEffect(() => {
@@ -27,15 +27,11 @@ const SettingsScreen = () => {
     const newTheme = isDarkMode ? 'light' : 'dark';
     setIsDarkMode(!isDarkMode);
     await SecureStore.setItemAsync('theme', newTheme);
-    // Aqui futuramente podemos aplicar a troca de tema real
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Login' }],
-    });
+    setUsuario(null); // limpa o contexto de usuário
+    await logout();   // faz logout via authService e redireciona
   };
 
   return (

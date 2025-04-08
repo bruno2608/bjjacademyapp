@@ -1,14 +1,17 @@
-// src/screens/LoginScreen.js
 import React, { useState } from 'react';
 import {
-  View, Text, TextInput, TouchableOpacity,
-  ActivityIndicator, Image, KeyboardAvoidingView, Platform
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
-import { supabase } from '../services/supabaseClient';
 import { useTheme } from '../contexts/ThemeContext';
-import Toast from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
-import { resetTo } from '../navigation/navigationRef';
+import { loginWithApi } from '../services/authService';
 
 const LoginScreen = () => {
   const theme = useTheme();
@@ -20,26 +23,20 @@ const LoginScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-    if (error) {
-      Toast.show({
-        type: 'error',
-        text1: 'Erro ao fazer login',
-        text2: error.message,
-      });
-    } else {
-      resetTo('Success');
-    }
-
-    setLoading(false);
+    await loginWithApi(email, password, setLoading);
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
       <View style={styles.logoArea}>
-        <Image source={{ uri: 'https://i.imgur.com/WdGink9.png' }} style={styles.logoImage} resizeMode="contain" />
+        <Image
+          source={{ uri: 'https://i.imgur.com/WdGink9.png' }}
+          style={styles.logoImage}
+          resizeMode="contain"
+        />
         <Text style={styles.slogan}>Entre na sua conta para continuar</Text>
       </View>
 
@@ -63,13 +60,28 @@ const LoginScreen = () => {
             style={[styles.input, { flex: 1, paddingRight: 40 }]}
             secureTextEntry={!showPassword}
           />
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeButton}>
-            <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={20} color={theme.text} />
+          <TouchableOpacity
+            onPress={() => setShowPassword(!showPassword)}
+            style={styles.eyeButton}
+          >
+            <Ionicons
+              name={showPassword ? 'eye-off' : 'eye'}
+              size={20}
+              color={theme.text}
+            />
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
-          {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Entrar</Text>}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleLogin}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Entrar</Text>
+          )}
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

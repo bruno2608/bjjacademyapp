@@ -33,26 +33,31 @@
 
 ## 🔐 Funcionalidades Atuais
 
-No momento, o projeto está em fase inicial de desenvolvimento. Já implementamos:
+Estas são as funcionalidades já implementadas até a versão `v1.0.2`:
 
-- ✅ **Navbar** (autenticação conectada ao Supabase)
-- ✅ **Algumas telas iniciais para testes de UI**
+- ✅ **Tela de Login** funcional com Supabase
+- ✅ **Animação de sucesso** após login (Lottie)
+- ✅ **Controle de sessão** com Context API (`setUsuario`)
+- ✅ **Redirecionamento inteligente** com `navigationRef`
+- ✅ **Toast de erro** com `react-native-toast-message`
+- ✅ **Logout funcional** com `resetTo('AuthStack')`
+- ✅ **Tab Bar visível** após autenticação (`MainTabs`)
+- ✅ **Modo escuro aplicado** por padrão (dark mode)
+- ✅ **Botão de visibilidade de senha** com ícone customizado
 
-> ⚠️ Nesta versão `v0.0.1`, o foco está na estruturação da base do sistema de autenticação.
+> 🧪 O fluxo de autenticação está estável e pronto para evoluir com cadastro e permissões.
 
 ---
 
-## 🎯 Objetivos da Versão `v0.0.1`
+## 🎯 Objetivos da Versão `v1.0.2`
 
-Nesta fase, estamos trabalhando nas seguintes funcionalidades essenciais:
+- ✅ Tela de login integrada com Supabase
+- ❌ Tela de cadastro de usuário (instrutores/alunos)
+- ❌ Tela de redefinição de senha
+- ✅ Validação de sessão ativa (controle via Context API)
+- ✅ Página inicial (home) com base do perfil do usuário
 
-- [ ] Tela de login
-- [ ] Tela de cadastro de usuário (instrutores/alunos)
-- [ ] Tela de redefinição de senha
-- [ ] Validação de sessão ativa (usuário logado permanece conectado)
-- [ ] Página inicial (home) com layout base do perfil do usuário
-
-> 💡 Após a finalização do fluxo de autenticação, iniciaremos a construção da **primeira versão da tela inicial**, que servirá como base para o restante da aplicação.
+> 💡 O foco desta versão foi estabilizar o fluxo de login e logout, garantir a navegação entre stacks e preparar para futura integração com uma API própria.
 
 ---
 
