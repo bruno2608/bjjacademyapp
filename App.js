@@ -1,22 +1,22 @@
 // App.js
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
-
+import AppNavigator from './src/navigation/AppNavigator';
 import { ThemeProvider } from './src/contexts/ThemeContext';
 import { UserProvider } from './src/contexts/UserContext';
-import AppNavigator from './src/navigation/AppNavigator';
+import { navigationRef } from './src/navigation/navigationRef';
+import Toast from 'react-native-toast-message';
+import CustomToast from './src/components/CustomToast';
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <ThemeProvider>
-        <UserProvider>
-          <NavigationContainer>
-            <AppNavigator />
-          </NavigationContainer>
-        </UserProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <ThemeProvider>
+      <UserProvider>
+        <NavigationContainer ref={navigationRef}>
+          <AppNavigator />
+          <Toast config={{ error: (props) => <CustomToast {...props} /> }} />
+        </NavigationContainer>
+      </UserProvider>
+    </ThemeProvider>
   );
 }

@@ -1,62 +1,45 @@
 // src/screens/LoginScreen.js
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-  Image,
-  KeyboardAvoidingView,
-  Platform,
+  View, Text, TextInput, TouchableOpacity,
+  ActivityIndicator, Image, KeyboardAvoidingView, Platform
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { supabase } from '../services/supabaseClient';
 import { useTheme } from '../contexts/ThemeContext';
+import Toast from 'react-native-toast-message';
+import { Ionicons } from '@expo/vector-icons';
+import { resetTo } from '../navigation/navigationRef';
 
 const LoginScreen = () => {
   const theme = useTheme();
   const styles = getStyles(theme);
-  const navigation = useNavigation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
     setLoading(true);
-    setError('');
-    setSuccessMessage('');
-
-    // Faz login no Supabase
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-      setError(error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Erro ao fazer login',
+        text2: error.message,
+      });
     } else {
-      setSuccessMessage('Login realizado com sucesso!');
-      // Aguarda 1.5 segundo para exibir a mensagem e então vai para a tela de sucesso
-      setTimeout(() => {
-        navigation.replace('Success');
-      }, 1500);
+      resetTo('Success');
     }
 
     setLoading(false);
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    >
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <View style={styles.logoArea}>
-        <Image
-          source={{ uri: 'https://i.imgur.com/WdGink9.png' }} // Ajuste o link se precisar
-          style={styles.logoImage}
-          resizeMode="contain"
-        />
+        <Image source={{ uri: 'https://i.imgur.com/WdGink9.png' }} style={styles.logoImage} resizeMode="contain" />
         <Text style={styles.slogan}>Entre na sua conta para continuar</Text>
       </View>
 
@@ -71,24 +54,22 @@ const LoginScreen = () => {
           keyboardType="email-address"
         />
 
-        <TextInput
-          placeholder="Senha"
-          placeholderTextColor={theme.subtext}
-          value={password}
-          onChangeText={setPassword}
-          style={styles.input}
-          secureTextEntry
-        />
-
-        {error ? <Text style={styles.errorText}>{error}</Text> : null}
-        {successMessage ? <Text style={styles.successText}>{successMessage}</Text> : null}
+        <View style={styles.passwordWrapper}>
+          <TextInput
+            placeholder="Senha"
+            placeholderTextColor={theme.subtext}
+            value={password}
+            onChangeText={setPassword}
+            style={[styles.input, { flex: 1, paddingRight: 40 }]}
+            secureTextEntry={!showPassword}
+          />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeButton}>
+            <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={20} color={theme.text} />
+          </TouchableOpacity>
+        </View>
 
         <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
-          {loading ? (
-            <ActivityIndicator color="#fff" />
-          ) : (
-            <Text style={styles.buttonText}>Entrar</Text>
-          )}
+          {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Entrar</Text>}
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -120,12 +101,21 @@ const getStyles = (theme) => ({
   },
   input: {
     borderWidth: 1,
-    borderColor: theme.card,
+    borderColor: theme.border,
     backgroundColor: theme.card,
     color: theme.text,
     borderRadius: 8,
     padding: 14,
     fontSize: 16,
+  },
+  passwordWrapper: {
+    position: 'relative',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  eyeButton: {
+    position: 'absolute',
+    right: 14,
   },
   button: {
     backgroundColor: theme.primary,
@@ -138,18 +128,6 @@ const getStyles = (theme) => ({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
-  },
-  errorText: {
-    color: 'red',
-    fontSize: 13,
-    textAlign: 'center',
-    marginTop: -8,
-  },
-  successText: {
-    color: 'green',
-    fontSize: 13,
-    textAlign: 'center',
-    marginTop: 8,
   },
 });
 
