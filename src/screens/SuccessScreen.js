@@ -1,22 +1,23 @@
-// src/screens/SuccessScreen.js
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { useTheme } from '../contexts/ThemeContext';
-import { useUsuario } from '../contexts/UserContext'; // p/ setUsuario
+import { useUsuario } from '../contexts/UserContext';
+import { resetTo } from '../navigation/navigationRef';
 
 const SuccessScreen = () => {
   const theme = useTheme();
-  const { setUsuario } = useUsuario(); 
+  const { setUsuario } = useUsuario();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      // Seta algum objeto de usuário (pode ser qualquer dado, mas não nulo)
-      setUsuario({ email: 'adminhml@bjjacademy.com.br', id: 'XYZ' });
-      // Isso faz o 'isAuthenticated' virar true no AppNavigator => exibe MainTabs
+    const timeout = setTimeout(() => {
+      // ⚠️ Exemplo fixo apenas para ativar autenticação local
+      setUsuario({ id: 'placeholder', email: 'usuario@bjj.com.br' });
+      resetTo('MainTabs');
     }, 1500);
-    return () => clearTimeout(timer);
-  }, [setUsuario]);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
@@ -35,13 +36,18 @@ const SuccessScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, justifyContent: 'center', alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   animation: {
-    width: 200, height: 200,
+    width: 200,
+    height: 200,
   },
   message: {
-    fontSize: 18, marginTop: 16,
+    fontSize: 18,
+    marginTop: 16,
+    fontWeight: '600',
   },
 });
 
