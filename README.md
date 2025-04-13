@@ -5,7 +5,7 @@
   <p>Plataforma de gerenciamento para academias de Jiu-Jitsu Brasileiro.</p>
 
   <p align="center">
-    <img src="https://img.shields.io/badge/status-em%20desenvolvimento-yellow" alt="Status do Projeto" />
+    <img src="https://img.shields.io/badge/status-estável-green" alt="Status do Projeto" />
     <a href="./LICENSE"><img src="https://img.shields.io/badge/license-BJJ--Academy-blueviolet" alt="Licença" /></a>
     <img src="https://img.shields.io/badge/react-18.x-blue" alt="React Version" />
     <img src="https://img.shields.io/badge/Supabase-PostgreSQL-green" alt="Supabase" />
@@ -14,10 +14,19 @@
 
 ---
 
+## ✅ Versão Atual: `v1.0.6`
+
+Fluxo de login 100% funcional com autenticação JWT, animação de sucesso e redirecionamento inteligente.
+
+---
+
 ## 🖼️ Preview da Interface
 
-- 🧱 **Em Breve**
-<img src="https://via.placeholder.com/800x400.png?text=Screenshot+da+Aplicacao+BJJ+Academy" alt="Preview da Aplicação" />
+<div align="center">
+<img src="https://i.imgur.com/YIITDzG.png" width="800" />
+<p align="center">
+<p>Em Evolução</p>
+</div>
 
 ---
 
@@ -33,31 +42,19 @@
 
 ## 🔐 Funcionalidades Atuais
 
-Estas são as funcionalidades já implementadas até a versão `v1.0.2`:
+Estas são as funcionalidades já implementadas até a versão `v1.0.6`:
 
-- ✅ **Tela de Login** funcional com Supabase
-- ✅ **Animação de sucesso** após login (Lottie)
-- ✅ **Controle de sessão** com Context API (`setUsuario`)
-- ✅ **Redirecionamento inteligente** com `navigationRef`
-- ✅ **Toast de erro** com `react-native-toast-message`
-- ✅ **Logout funcional** com `resetTo('AuthStack')`
-- ✅ **Tab Bar visível** após autenticação (`MainTabs`)
-- ✅ **Modo escuro aplicado** por padrão (dark mode)
-- ✅ **Botão de visibilidade de senha** com ícone customizado
+- ✅ Tela de login integrada com API NestJS + JWT
+- ✅ Toast de erro (visível no mobile e web)
+- ✅ Context API com `setUsuario` para controle global
+- ✅ Redirecionamento com `resetTo('Success')` e `MainTabs`
+- ✅ Tela `SuccessScreen` com animação (Lottie)
+- ✅ Navegação com `AppNavigator`, `AuthStack`, `MainTabs`
+- ✅ Design responsivo (modo escuro, visual fluido)
+- ✅ Tab Bar exibida após login
+- ✅ .env e .env.prod preparados para produção
 
-> 🧪 O fluxo de autenticação está estável e pronto para evoluir com cadastro e permissões.
-
----
-
-## 🎯 Objetivos da Versão `v1.0.2`
-
-- ✅ Tela de login integrada com Supabase
-- ❌ Tela de cadastro de usuário (instrutores/alunos)
-- ❌ Tela de redefinição de senha
-- ✅ Validação de sessão ativa (controle via Context API)
-- ✅ Página inicial (home) com base do perfil do usuário
-
-> 💡 O foco desta versão foi estabilizar o fluxo de login e logout, garantir a navegação entre stacks e preparar para futura integração com uma API própria.
+> 💡 Login estável com backend próprio e tela de sucesso.  
 
 ---
 
@@ -98,48 +95,6 @@ npm test          # Executa os testes automatizados
 npm run build     # Cria a build de produção
 npm run eject     # Expõe configurações internas (irreversível)
 ```
----
-
-## 📁 Estrutura de Diretórios
-
-```
-BJJACADEMYAPP/
-├── .expo/                  # Configurações do Expo
-├── .vscode/                # Configurações do VSCode
-├── assets/                 # Arquivos estáticos (imagens, fontes, etc)
-├── node_modules/           # Dependências do projeto
-├── src/                    # Código-fonte principal
-│   ├── components/         # Componentes reutilizáveis
-│   │   └── Header.js
-│   ├── contexts/           # Context API (Gerenciamento de tema, autenticação, etc)
-│   │   └── ThemeContext.js
-│   ├── hooks/              # Custom Hooks
-│   │   └── useThemeColors.js
-│   ├── navigation/         # Configurações de navegação
-│   │   └── AppNavigator.js
-│   ├── screens/            # Telas principais do app
-│   │   ├── CheckinScreen.js
-│   │   ├── DetailScreen.js
-│   │   ├── EvolucaoScreen.js
-│   │   ├── HomeScreen.js
-│   │   ├── PresencaScreen.js
-│   │   └── SettingsScreen.js
-│   ├── themes/             # Sistema de temas (cores, estilos)
-│   │   └── index.js
-├── .gitignore              # Arquivos ignorados pelo Git
-├── App.js                  # Ponto de entrada da aplicação
-├── app.json                # Configuração do projeto (Expo)
-├── index.js                # Entry point (usado para web/native)
-├── LICENSE                 # Licença do projeto
-├── package.json            # Dependências e scripts do projeto
-├── package-lock.json       # Lockfile do npm
-├── README.md               # Documentação do projeto
-└── yarn.lock               # Lockfile do yarn
-```
-
----
-
-> Projeto em desenvolvimento contínuo. Feedbacks e contribuições são bem-vindos! 👊
 
 ---
 
@@ -156,4 +111,5 @@ Entre em contato para uso comercial ou autorização: [contatobalvesfranca@gmail
 
 Feito com 💙 por [Bruno Alves Franca](https://github.com/balvesfranca)  
 📸 Instagram: [@balvesfranca](https://instagram.com/balvesfranca)
+
 ```

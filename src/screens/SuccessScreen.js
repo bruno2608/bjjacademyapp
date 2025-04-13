@@ -2,20 +2,15 @@ import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { useTheme } from '../contexts/ThemeContext';
-import { useUsuario } from '../contexts/UserContext';
 import { resetTo } from '../navigation/navigationRef';
 
 const SuccessScreen = () => {
   const theme = useTheme();
-  const { setUsuario } = useUsuario();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      // ⚠️ Exemplo fixo apenas para ativar autenticação local
-      setUsuario({ id: 'placeholder', email: 'usuario@bjj.com.br' });
       resetTo('MainTabs');
     }, 1500);
-
     return () => clearTimeout(timeout);
   }, []);
 

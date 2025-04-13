@@ -1,26 +1,19 @@
+// src/screens/LoginScreen.js
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  ImageBackground,
+  View, Text, TextInput, TouchableOpacity, ActivityIndicator,
+  Image, KeyboardAvoidingView, Platform, StyleSheet, ImageBackground
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { supabase } from '../services/supabaseClient';
-import { useTheme } from '../contexts/ThemeContext';
-import Toast from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
+import Toast from 'react-native-toast-message';
+import { useTheme } from '../contexts/ThemeContext';
+import { loginWithApi } from '../services/authService';
+import { useUserContext } from '../contexts/UserContext'; // ✅ você já tem esse contexto configurado?
 
 const LoginScreen = () => {
   const theme = useTheme();
-  const navigation = useNavigation();
   const styles = getStyles(theme);
+  const { setUsuario } = useUserContext();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,20 +21,8 @@ const LoginScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-    if (error) {
-      Toast.show({
-        type: 'error',
-        text1: 'Erro ao fazer login',
-        text2: error.message,
-      });
-    } else {
-      navigation.navigate('Success'); // ✅ corrigido
-    }
-
-    setLoading(false);
+    console.log('🔍 Executando login com:', email, password);
+    await loginWithApi(email, password, setLoading, setUsuario);
   };
 
   return (
@@ -54,16 +35,12 @@ const LoginScreen = () => {
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.backButton} onPress={() => resetTo('Welcome')}>
           <Ionicons name="chevron-back" size={28} color={theme.text} />
         </TouchableOpacity>
 
         <View style={styles.logoArea}>
-          <Image
-            source={{ uri: 'https://i.imgur.com/WdGink9.png' }}
-            style={styles.logoImage}
-            resizeMode="contain"
-          />
+          <Image source={{ uri: 'https://i.imgur.com/WdGink9.png' }} style={styles.logoImage} resizeMode="contain" />
           <Text style={styles.slogan}>Entre na sua conta para continuar</Text>
         </View>
 
@@ -104,7 +81,7 @@ const LoginScreen = () => {
             )}
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+          <TouchableOpacity onPress={() => resetTo('Cadastro')}>
             <Text style={styles.registerText}>Ainda não tem conta? Cadastrar-se</Text>
           </TouchableOpacity>
         </View>
