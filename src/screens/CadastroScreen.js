@@ -4,25 +4,30 @@ import {
   Image, KeyboardAvoidingView, Platform, StyleSheet, ImageBackground
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import Toast from 'react-native-toast-message';
 import { useTheme } from '../contexts/ThemeContext';
-import { loginWithApi } from '../services/authService';
-import { useUserContext } from '../contexts/UserContext';
+import { registerWithApi } from '../services/authService';
 import { resetTo } from '../navigation/navigationRef';
 
-const LoginScreen = () => {
+const CadastroScreen = () => {
   const theme = useTheme();
   const styles = getStyles(theme);
-  const { setUsuario } = useUserContext();
 
+  const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [senha, setSenha] = useState('');
+  const [codigoConvite, setCodigoConvite] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
-    console.log('🔍 Executando login com:', email, password);
-    await loginWithApi(email, password, setLoading, setUsuario);
+  const handleRegister = async () => {
+    const sucesso = await registerWithApi(
+      { nome, email, senha, codigo_convite: codigoConvite },
+      setLoading
+    );
+
+    if (!sucesso) {
+      console.log('⚠️ Cadastro falhou. Toast já exibido pela service.');
+    }
   };
 
   return (
@@ -41,10 +46,17 @@ const LoginScreen = () => {
 
         <View style={styles.logoArea}>
           <Image source={{ uri: 'https://i.imgur.com/WdGink9.png' }} style={styles.logoImage} resizeMode="contain" />
-          <Text style={styles.slogan}>Entre na sua conta para continuar</Text>
+          <Text style={styles.slogan}>Comece sua jornada no Jiu-Jitsu agora</Text>
         </View>
 
         <View style={styles.form}>
+          <TextInput
+            placeholder="Nome completo"
+            placeholderTextColor={theme.subtext}
+            value={nome}
+            onChangeText={setNome}
+            style={styles.input}
+          />
           <TextInput
             placeholder="E-mail"
             placeholderTextColor={theme.subtext}
@@ -54,13 +66,12 @@ const LoginScreen = () => {
             autoCapitalize="none"
             keyboardType="email-address"
           />
-
           <View style={styles.passwordWrapper}>
             <TextInput
               placeholder="Senha"
               placeholderTextColor={theme.subtext}
-              value={password}
-              onChangeText={setPassword}
+              value={senha}
+              onChangeText={setSenha}
               style={[styles.input, { flex: 1, paddingRight: 40 }]}
               secureTextEntry={!showPassword}
             />
@@ -68,21 +79,20 @@ const LoginScreen = () => {
               <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={20} color={theme.text} />
             </TouchableOpacity>
           </View>
-
-          <TouchableOpacity>
-            <Text style={styles.forgotText}>Esqueci minha senha</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
+          <TextInput
+            placeholder="Código de convite"
+            placeholderTextColor={theme.subtext}
+            value={codigoConvite}
+            onChangeText={setCodigoConvite}
+            style={styles.input}
+            autoCapitalize="characters"
+          />
+          <TouchableOpacity style={styles.button} onPress={handleRegister} disabled={loading}>
             {loading ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Text style={styles.buttonText}>Entrar</Text>
+              <Text style={styles.buttonText}>Cadastrar</Text>
             )}
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => resetTo('Cadastro')}>
-            <Text style={styles.registerText}>Ainda não tem conta? Cadastrar-se</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -136,11 +146,6 @@ const getStyles = (theme) => ({
     position: 'absolute',
     right: 14,
   },
-  forgotText: {
-    fontSize: 14,
-    color: theme.subtext,
-    textAlign: 'right',
-  },
   button: {
     backgroundColor: '#1877F2',
     padding: 16,
@@ -153,12 +158,6 @@ const getStyles = (theme) => ({
     fontWeight: 'bold',
     fontSize: 16,
   },
-  registerText: {
-    fontSize: 14,
-    color: theme.text,
-    textAlign: 'center',
-    marginTop: 12,
-  },
 });
 
-export default LoginScreen;
+export default CadastroScreen;

@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.7](https://github.com/bruno2608/bjjacademyapp/compare/v1.0.6...v1.0.7) (2025-04-15)
+
+#### ✨ Funcionalidades
+- Tela de cadastro com código de convite, validação e sucesso
+- `SuccessScreen` agora interpreta `reset: true` para redirecionar com `resetTo()`
+- Tela de Login agora retorna corretamente para `Welcome`
+- Tela de Cadastro agora retorna corretamente para `Welcome`
+- Navegação 100% fluida com histórico limpo em fluxos de login/cadastro
+- Animações centralizadas para reuso (Lottie)
+- Logs de cadastro e login mais detalhados
+- Toasts de erro e sucesso integrados ao fluxo
+- Correção de travamentos e mensagens duplicadas
+
+#### 🛠 Melhorias técnicas
+- Estrutura de `.env` e `.env.prod` configurada para produção
+- Tela `SuccessScreen` corrigida para não sobrescrever contexto
+- Ajustes de CORS no backend para permitir login via app mobile/web
+- Logs detalhados (`console.log`) para debug no mobile
+- Inclusão da tela `Success` no `AppNavigator` (resolvendo erro de rota)
+- Tratamento de erros com feedback visual claro
+
 ### [1.0.6](https://github.com/bruno2608/bjjacademyapp/compare/v1.0.5...v1.0.6) (2025-04-12)
 
 #### ✨ Funcionalidades

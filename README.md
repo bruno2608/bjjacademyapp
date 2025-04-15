@@ -14,9 +14,9 @@
 
 ---
 
-## ✅ Versão Atual: `v1.0.6`
+## ✅ Versão Atual: `v1.0.7`
 
-Fluxo de login 100% funcional com autenticação JWT, animação de sucesso e redirecionamento inteligente.
+Fluxo completo de login e cadastro 100% funcional com autenticação JWT, animações de sucesso e redirecionamentos resetados com histórico limpo.
 
 ---
 
@@ -42,19 +42,16 @@ Fluxo de login 100% funcional com autenticação JWT, animação de sucesso e re
 
 ## 🔐 Funcionalidades Atuais
 
-Estas são as funcionalidades já implementadas até a versão `v1.0.6`:
+Estas são as funcionalidades já implementadas até a versão `v1.0.7`:
 
-- ✅ Tela de login integrada com API NestJS + JWT
-- ✅ Toast de erro (visível no mobile e web)
-- ✅ Context API com `setUsuario` para controle global
-- ✅ Redirecionamento com `resetTo('Success')` e `MainTabs`
-- ✅ Tela `SuccessScreen` com animação (Lottie)
-- ✅ Navegação com `AppNavigator`, `AuthStack`, `MainTabs`
-- ✅ Design responsivo (modo escuro, visual fluido)
-- ✅ Tab Bar exibida após login
-- ✅ .env e .env.prod preparados para produção
-
-> 💡 Login estável com backend próprio e tela de sucesso.  
+- ✅ Cadastro com código de convite e redirecionamento para Login
+- ✅ Tela de sucesso reutilizável (com reset ou navegação)
+- ✅ Login com animação e redirecionamento para as abas principais
+- ✅ Toast de erro e logs detalhados para debug
+- ✅ Botões de voltar corrigidos em Cadastro e Login (voltam para Welcome)
+- ✅ Contexto global de autenticação com persistência inicial
+- ✅ Navegação com `resetTo` em fluxos críticos
+- ✅ Arquitetura estável com separação de navegação por stack
 
 ---
 
@@ -68,32 +65,32 @@ Estas são funcionalidades planejadas para as próximas versões do projeto:
 - Criação e organização de turmas
 - Diferenciação de acesso entre instrutor e aluno
 - Interface amigável e voltada para a realidade do BJJ
+- Upload de avatar e edição de perfil
+- Presença, Check-in, Evolução e Graduação
 
 ### 🧠 Planejamento de Expansão
 - ✅ Painel administrativo com permissões
 - 📊 Dashboard com métricas da academia
-- 📱 Interface responsiva para mobile
+- 📱 Integração de QR Code no check-in
 - 🔔 Sistema de notificações (promoções, eventos, vencimentos)
 
 ---
 
 ## 📦 Stack Utilizada
 
-- **Frontend:** React.js
-- **Backend as a Service:** Supabase (PostgreSQL, Auth, Storage)
+- **Frontend:** React Native com Expo
+- **Backend:** NestJS + PostgreSQL (via Supabase)
 - **Gerenciamento de estado/contexto:** Context API
-- **Estilização:** (futuramente) TailwindCSS / ShadCN UI
+- **Estilização:** Tema dinâmico (dark mode padrão)
+- **Autenticação:** JWT + Toast + Lottie
 
 ---
 
 ## 📦 Scripts
 
 ```bash
-npm install       # Instala as dependências
-npm start         # Inicia o app em modo de desenvolvimento
-npm test          # Executa os testes automatizados
-npm run build     # Cria a build de produção
-npm run eject     # Expõe configurações internas (irreversível)
+npm install       # Instala dependências
+npx expo start    # Inicia o projeto via Expo
 ```
 
 ---
