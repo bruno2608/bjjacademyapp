@@ -40,18 +40,25 @@ Fluxo completo de login e cadastro 100% funcional com autenticação JWT, anima�
 
 ---
 
+## ✅ Versão Atual: `v1.0.8`
+
+Autenticação completa com login e logout funcional via JWT. Contexto de usuário com persistência automática, navegação global, animações de sucesso e tela de configurações com troca de tema e botão de logout.
+
+---
+
 ## 🔐 Funcionalidades Atuais
 
-Estas são as funcionalidades já implementadas até a versão `v1.0.7`:
+Estas são as funcionalidades já implementadas até a versão `v1.0.8`:
 
-- ✅ Cadastro com código de convite e redirecionamento para Login
-- ✅ Tela de sucesso reutilizável (com reset ou navegação)
-- ✅ Login com animação e redirecionamento para as abas principais
-- ✅ Toast de erro e logs detalhados para debug
-- ✅ Botões de voltar corrigidos em Cadastro e Login (voltam para Welcome)
-- ✅ Contexto global de autenticação com persistência inicial
-- ✅ Navegação com `resetTo` em fluxos críticos
-- ✅ Arquitetura estável com separação de navegação por stack
+- ✅ Login via API com JWT, animação e redirecionamento com `resetTo`
+- ✅ Cadastro com código de convite e retorno automático ao login
+- ✅ Tela de sucesso reutilizável com animação e controle de destino
+- ✅ Contexto global persistente com `AsyncStorage`
+- ✅ Logout funcional com reset automático para o AuthStack
+- ✅ Navegação global via `navigationRef`
+- ✅ Toasts de erro e sucesso com feedback visual elegante
+- ✅ Tela de configurações com troca de tema (escuro/claro) e logout
+- ✅ Estrutura modular com `AuthStack`, `MainTabs` e `AppNavigator`
 
 ---
 

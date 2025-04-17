@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
+import * as jwtDecode from 'jwt-decode'; // ✅ Import compatível com v4.x
 import { resetTo } from '../navigation/navigationRef';
 
 const API_URL = 'http://192.168.100.87:3000';
@@ -14,13 +15,22 @@ export async function loginWithApi(email, password, setLoading, setUsuario) {
       senha: password,
     });
 
-    console.log('✅ Login: resposta da API:', response.data);
+    const token = response.data?.token || response.data?.access_token;
+    if (!token) throw new Error('Token não recebido da API');
 
-    const { token, usuario } = response.data;
+    // ✅ jwtDecode v4.x usa named export
+    const decoded = jwtDecode.jwtDecode(token);
 
-    if (!token || !usuario) throw new Error('Resposta inválida da API');
+    const usuario = {
+      id: decoded.sub,
+      email: decoded.email,
+      academia_id: decoded.academia_id,
+      nivel_acesso: decoded.nivel_acesso,
+      token,
+    };
 
-    setUsuario({ ...usuario, token });
+    console.log('✅ Login decodificado:', usuario);
+    setUsuario(usuario); // o contexto já salva no AsyncStorage
 
     resetTo('Success', {
       title: 'Login realizado com sucesso!',

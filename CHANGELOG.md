@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.8](https://github.com/bruno2608/bjjacademyapp/compare/v1.0.7...v1.0.8) (2025-04-16)
+
+#### ✨ Funcionalidades
+- Logout funcional com remoção do usuário (`AsyncStorage`) e redirecionamento via `navigationRef.resetRoot`
+- Botão "Sair da Conta" na tela de configurações integrado ao contexto de usuário
+- Tela `SettingsScreen` com alternância de tema e suporte ao modo escuro/claro
+
+#### 🛠 Melhorias técnicas
+- Atualização para `jwt-decode@4.x` com `jwtDecode.jwtDecode()` ajustado
+- Correção do uso incorreto de `useUsuario` para `useUserContext` na tela de configurações
+- Ordem de rotas ajustada no `AppNavigator` para abrir em `MainTabs` se autenticado
+- Proteção na tela `SuccessScreen` para evitar travamento sem `nextScreen`
+
+#### 🐛 Correções
+- Corrigido travamento no login por causa de importação incorreta do `jwt-decode`
+- Corrigido bug ao abrir o app e cair direto na tela de sucesso (ordem de rotas ajustada)
+
+
 ### [1.0.7](https://github.com/bruno2608/bjjacademyapp/compare/v1.0.6...v1.0.7) (2025-04-15)
 
 #### ✨ Funcionalidades

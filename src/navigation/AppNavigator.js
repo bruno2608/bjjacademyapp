@@ -3,24 +3,24 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthStack from './AuthStack';
 import MainTabs from './MainTabs';
-import { useUsuario } from '../contexts/UserContext';
+import { useUserContext } from '../contexts/UserContext';
 import SuccessScreen from '../screens/SuccessScreen';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
-  const { usuario } = useUsuario();
+  const { usuario } = useUserContext();
   const isAuthenticated = !!usuario;
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {!usuario && (
+      {!isAuthenticated && (
         <Stack.Screen name="AuthStack" component={AuthStack} />
       )}
-      {usuario && (
+      {isAuthenticated && (
         <>
-          <Stack.Screen name="Success" component={SuccessScreen} />
           <Stack.Screen name="MainTabs" component={MainTabs} />
+          <Stack.Screen name="Success" component={SuccessScreen} />
         </>
       )}
     </Stack.Navigator>

@@ -5,12 +5,12 @@ import { useTheme } from '../contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 import * as SecureStore from 'expo-secure-store';
 import { logout } from '../services/authService';
-import { useUsuario } from '../contexts/UserContext';
+import { useUserContext } from '../contexts/UserContext';
 
 const SettingsScreen = () => {
   const theme = useTheme();
   const styles = getStyles(theme);
-  const { setUsuario } = useUsuario();
+  const { setUsuario } = useUserContext();
   const [isDarkMode, setIsDarkMode] = useState(theme.mode === 'dark');
 
   useEffect(() => {

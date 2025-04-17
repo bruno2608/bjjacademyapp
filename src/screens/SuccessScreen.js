@@ -26,8 +26,12 @@ const SuccessScreen = () => {
       console.log('🧪 Preparando redirecionamento em', delay, 'ms...');
       timeout = setTimeout(() => {
         try {
-          console.log(`🔁 Redirecionando via ${reset ? 'resetTo' : 'navigateTo'}:`, nextScreen);
-          reset ? resetTo(nextScreen) : navigateTo(nextScreen);
+          if (reset) {
+            console.log('🔁 Redefinindo para:', nextScreen);
+            resetTo(nextScreen);
+          } else {
+            navigateTo(nextScreen);
+          }
         } catch (err) {
           console.error('❌ Erro ao redirecionar:', err);
         }
