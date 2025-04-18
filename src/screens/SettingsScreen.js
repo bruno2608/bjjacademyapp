@@ -1,102 +1,110 @@
-// src/screens/SettingsScreen.js
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { useTheme } from '../contexts/ThemeContext';
-import { Ionicons } from '@expo/vector-icons';
-import * as SecureStore from 'expo-secure-store';
-import { logout } from '../services/authService';
+
+import React from 'react';
+import { View, Text, StyleSheet, Image, ScrollView, Button } from 'react-native';
+import Constants from 'expo-constants';
+import AppLayout from '../components/AppLayout';
 import { useUserContext } from '../contexts/UserContext';
+import { useTheme } from '../contexts/ThemeContext';
 
-const SettingsScreen = () => {
+export default function SettingsScreen() {
+  const { logout } = useUserContext();
   const theme = useTheme();
-  const styles = getStyles(theme);
-  const { setUsuario } = useUserContext();
-  const [isDarkMode, setIsDarkMode] = useState(theme.mode === 'dark');
-
-  useEffect(() => {
-    const loadThemePreference = async () => {
-      const savedTheme = await SecureStore.getItemAsync('theme');
-      if (savedTheme) {
-        setIsDarkMode(savedTheme === 'dark');
-      }
-    };
-    loadThemePreference();
-  }, []);
-
-  const toggleTheme = async () => {
-    const newTheme = isDarkMode ? 'light' : 'dark';
-    setIsDarkMode(!isDarkMode);
-    await SecureStore.setItemAsync('theme', newTheme);
+  const colors = theme?.colors || {
+    background: '#111',
+    text: '#fff',
+    card: '#1c1c1c',
   };
 
-  const handleLogout = async () => {
-    setUsuario(null); // limpa o contexto de usuário
-    await logout();   // faz logout via authService e redireciona
+  const user = {
+    nome: 'Bruno Alves',
+    email: 'adminhml@bjjacademy.com.br',
+    matricula: '00123',
+    avatar: 'https://ui-avatars.com/api/?name=Bruno+Alves&background=random',
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Configurações</Text>
-      <Text style={styles.subtitle}>Alternar entre temas e sair.</Text>
+    <AppLayout>
+      <ScrollView contentContainerStyle={[styles.container, { backgroundColor: colors.background }]}>
+        <View style={styles.header}>
+          <Image source={{ uri: user.avatar }} style={styles.avatar} />
+          <Text style={[styles.nome, { color: colors.text }]}>{user.nome}</Text>
+          <Text style={[styles.email, { color: colors.text }]}>{user.email}</Text>
+          <Text style={[styles.info, { color: colors.text }]}>Matrícula {user.matricula}</Text>
+        </View>
 
-      <TouchableOpacity onPress={toggleTheme} style={styles.button}>
-        <Ionicons
-          name={isDarkMode ? 'moon' : 'sunny'}
-          size={28}
-          color={theme.text}
-        />
-        <Text style={styles.buttonText}>
-          {isDarkMode ? 'Modo Escuro' : 'Modo Claro'}
+        <View style={styles.card}>
+<Text style={[styles.sectionTitle, { color: colors.text }]}>Tema</Text>
+
+<View style={{ marginVertical: 8 }}>
+  <Button title="🌙 Tema Escuro" onPress={() => theme.toggleTheme('dark')} />
+</View>
+<View style={{ marginVertical: 8 }}>
+  <Button title="☀️ Tema Claro" onPress={() => theme.toggleTheme('light')} />
+</View>
+<View style={{ marginVertical: 8 }}>
+  <Button title="🖥️ Tema do Sistema" onPress={() => theme.toggleTheme('system')} />
+</View>
+
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Privacidade</Text>
+          <Text style={[styles.info, { color: colors.text }]}>Política de dados • Termos de uso</Text>
+        </View>
+
+        <View style={{ marginTop: 24 }}>
+          <Button title="Sair do sistema" onPress={logout} />
+        </View>
+
+        <Text style={[styles.version, { color: colors.text }]}>
+          Versão do app: {Constants.expoConfig?.version || '1.0.0'}
         </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-        <Ionicons name="log-out-outline" size={28} color="red" />
-        <Text style={styles.logoutText}>Sair da Conta</Text>
-      </TouchableOpacity>
-    </View>
+      </ScrollView>
+    </AppLayout>
   );
-};
+}
 
-const getStyles = (theme) => ({
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 24,
-    justifyContent: 'center',
+    flexGrow: 1,
+    justifyContent: 'space-between',
+  },
+  header: {
     alignItems: 'center',
-    backgroundColor: theme.background,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 12,
-    color: theme.text,
-  },
-  subtitle: {
-    fontSize: 16,
     marginBottom: 24,
-    color: theme.subtext,
   },
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 16,
+  avatar: {
+    width: 88,
+    height: 88,
+    borderRadius: 44,
+    marginBottom: 12,
   },
-  buttonText: {
+  nome: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  email: {
+    fontSize: 14,
+    marginTop: 4,
+  },
+  info: {
+    fontSize: 13,
+    color: '#999',
+    marginTop: 2,
+  },
+  sectionTitle: {
     fontSize: 16,
-    marginLeft: 8,
-    color: theme.text,
+    fontWeight: '600',
+    marginBottom: 4,
   },
-  logoutButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 40,
+  card: {
+    backgroundColor: '#1a1a1a',
+    padding: 16,
+    borderRadius: 12,
+    marginTop: 8,
   },
-  logoutText: {
-    fontSize: 16,
-    color: 'red',
-    marginLeft: 8,
+  version: {
+    fontSize: 12,
+    textAlign: 'center',
+    marginTop: 48,
+    opacity: 0.5,
   },
 });
-
-export default SettingsScreen;
