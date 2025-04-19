@@ -1,12 +1,18 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 import Header from './Header';
 
 const AppLayout = ({ children }) => {
   return (
     <View style={styles.container}>
       <Header />
-      <View style={styles.content}>{children}</View>
+      <ScrollView
+        style={styles.scroll}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+      >
+        {children}
+      </ScrollView>
     </View>
   );
 };
@@ -14,10 +20,13 @@ const AppLayout = ({ children }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000', // fundo base (modo escuro)
+    backgroundColor: '#171717', // fundo escuro padrão
+  },
+  scroll: {
+    flex: 1,
   },
   content: {
-    flex: 1,
+    paddingBottom: 32,
   },
 });
 

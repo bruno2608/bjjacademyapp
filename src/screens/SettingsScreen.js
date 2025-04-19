@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, Button } from 'react-native';
 import Constants from 'expo-constants';
 import AppLayout from '../components/AppLayout';
 import { useUserContext } from '../contexts/UserContext';
@@ -24,49 +23,32 @@ export default function SettingsScreen() {
 
   return (
     <AppLayout>
-      <ScrollView contentContainerStyle={[styles.container, { backgroundColor: colors.background }]}>
-        <View style={styles.header}>
-          <Image source={{ uri: user.avatar }} style={styles.avatar} />
-          <Text style={[styles.nome, { color: colors.text }]}>{user.nome}</Text>
-          <Text style={[styles.email, { color: colors.text }]}>{user.email}</Text>
-          <Text style={[styles.info, { color: colors.text }]}>Matrícula {user.matricula}</Text>
-        </View>
+      <View style={styles.header}>
+        <Image source={{ uri: user.avatar }} style={styles.avatar} />
+        <Text style={[styles.nome, { color: colors.text }]}>{user.nome}</Text>
+        <Text style={[styles.email, { color: colors.text }]}>{user.email}</Text>
+        <Text style={[styles.info, { color: colors.text }]}>Matrícula {user.matricula}</Text>
+      </View>
 
-        <View style={styles.card}>
-<Text style={[styles.sectionTitle, { color: colors.text }]}>Tema</Text>
+      <View style={styles.card}>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Tema</Text>
+        <Button title="🌙 Tema Escuro" onPress={() => theme.toggleTheme('dark')} />
+        <Button title="☀️ Tema Claro" onPress={() => theme.toggleTheme('light')} />
+        <Button title="🖥️ Tema do Sistema" onPress={() => theme.toggleTheme('system')} />
+      </View>
 
-<View style={{ marginVertical: 8 }}>
-  <Button title="🌙 Tema Escuro" onPress={() => theme.toggleTheme('dark')} />
-</View>
-<View style={{ marginVertical: 8 }}>
-  <Button title="☀️ Tema Claro" onPress={() => theme.toggleTheme('light')} />
-</View>
-<View style={{ marginVertical: 8 }}>
-  <Button title="🖥️ Tema do Sistema" onPress={() => theme.toggleTheme('system')} />
-</View>
+      <View style={{ marginTop: 24 }}>
+        <Button title="Sair do sistema" onPress={logout} />
+      </View>
 
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>Privacidade</Text>
-          <Text style={[styles.info, { color: colors.text }]}>Política de dados • Termos de uso</Text>
-        </View>
-
-        <View style={{ marginTop: 24 }}>
-          <Button title="Sair do sistema" onPress={logout} />
-        </View>
-
-        <Text style={[styles.version, { color: colors.text }]}>
-          Versão do app: {Constants.expoConfig?.version || '1.0.0'}
-        </Text>
-      </ScrollView>
+      <Text style={[styles.version, { color: colors.text }]}>
+        Versão do app: {Constants.expoConfig?.version || '1.0.0'}
+      </Text>
     </AppLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 24,
-    flexGrow: 1,
-    justifyContent: 'space-between',
-  },
   header: {
     alignItems: 'center',
     marginBottom: 24,

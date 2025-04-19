@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import AppLayout from '../components/AppLayout';
 
 const aulasDoDia = [
   { id: 1, horario: '07:00', titulo: 'Iniciantes' },
@@ -22,29 +23,25 @@ export default function CheckinScreen() {
   const hoje = format(new Date(), "EEEE, d 'de' MMMM", { locale: ptBR });
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <Text style={[styles.titulo, { color: colors.text }]}>
-          Hoje · {hoje.charAt(0).toUpperCase() + hoje.slice(1)}
-        </Text>
+    <AppLayout>
+      <Text style={[styles.titulo, { color: colors.text }]}>
+        Hoje · {hoje.charAt(0).toUpperCase() + hoje.slice(1)}
+      </Text>
 
-        {aulasDoDia.map((aula) => (
-          <View key={aula.id} style={[styles.card, { backgroundColor: colors.card }]}>
-            <Text style={[styles.horario, { color: colors.text }]}>{aula.horario}</Text>
-            <Text style={[styles.subtitulo, { color: colors.text }]}>{aula.titulo}</Text>
-            <TouchableOpacity>
-              <Text style={[styles.botao, { color: colors.primary }]}>Marcar presença</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </ScrollView>
-    </SafeAreaView>
+      {aulasDoDia.map((aula) => (
+        <View key={aula.id} style={[styles.card, { backgroundColor: colors.card }]}>
+          <Text style={[styles.horario, { color: colors.text }]}>{aula.horario}</Text>
+          <Text style={[styles.subtitulo, { color: colors.text }]}>{aula.titulo}</Text>
+          <TouchableOpacity>
+            <Text style={[styles.botao, { color: colors.primary }]}>Marcar presença</Text>
+          </TouchableOpacity>
+        </View>
+      ))}
+    </AppLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  scroll: { padding: 16 },
   titulo: {
     fontSize: 20,
     fontWeight: 'bold',

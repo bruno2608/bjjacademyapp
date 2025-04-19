@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  SafeAreaView,
-} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import LottieView from 'lottie-react-native';
+import AppLayout from '../components/AppLayout';
 import FaixaComGraus from '../components/FaixaComGraus';
 import TimelineBullet from '../components/TimelineBullet';
 
@@ -29,84 +25,35 @@ export default function EvolucaoScreen() {
   };
 
   const historico = [
-    {
-      id: '6',
-      tipo: 'grau',
-      data: '2024-09-01',
-      faixa: 'Azul',
-      grau: 3,
-      professor: 'Prof. Ana',
-    },
-    {
-      id: '5',
-      tipo: 'graduacao',
-      data: '2024-03-15',
-      faixa: 'Azul',
-      grau: 0,
-      professor: 'Mestre Silva',
-    },
-    {
-      id: '4',
-      tipo: 'grau',
-      data: '2023-09-10',
-      faixa: 'Azul',
-      grau: 1,
-      professor: 'Prof. Ana',
-    },
-    {
-      id: '3',
-      tipo: 'grau',
-      data: '2023-03-12',
-      faixa: 'Azul',
-      grau: 0,
-      professor: 'Prof. Ana',
-    },
-    {
-      id: '2',
-      tipo: 'grau',
-      data: '2022-07-06',
-      faixa: 'Branca',
-      grau: 4,
-      professor: 'Prof. Carlos',
-    },
-    {
-      id: '1',
-      tipo: 'graduacao',
-      data: '2021-01-10',
-      faixa: 'Branca',
-      grau: 0,
-      professor: 'Mestre Silva',
-    },
+    { id: '6', tipo: 'grau', data: '2024-09-01', faixa: 'Azul', grau: 3, professor: 'Prof. Ana' },
+    { id: '5', tipo: 'graduacao', data: '2024-03-15', faixa: 'Azul', grau: 0, professor: 'Mestre Silva' },
+    { id: '4', tipo: 'grau', data: '2023-09-10', faixa: 'Azul', grau: 1, professor: 'Prof. Ana' },
+    { id: '3', tipo: 'grau', data: '2023-03-12', faixa: 'Azul', grau: 0, professor: 'Prof. Ana' },
+    { id: '2', tipo: 'grau', data: '2022-07-06', faixa: 'Branca', grau: 4, professor: 'Prof. Carlos' },
+    { id: '1', tipo: 'graduacao', data: '2021-01-10', faixa: 'Branca', grau: 0, professor: 'Mestre Silva' },
   ];
 
   return (
-    <SafeAreaView style={styles.safe}>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Minha Evolução</Text>
+    <AppLayout>
+      <View style={styles.topo}>
+        <LottieView
+          source={{ uri: 'https://lottie.host/3e013e95-9dbe-43e1-9bff-a710674f4fdd/7EaX5G4hKV.lottie' }}
+          autoPlay
+          loop
+          style={{ width: 140, height: 140 }}
+        />
+        
+        
+        <Text style={styles.faixaAtual}>🎖 Faixa Atual: {faixaAtual.faixa} – {faixaAtual.grau}º grau</Text>
+        <FaixaComGraus faixa={faixaAtual.faixa} grau={faixaAtual.grau} />
+        <Text style={styles.detalhe}>📆 Desde {new Date(faixaAtual.desde).toLocaleDateString('pt-BR')}</Text>
+        <Text style={styles.detalhe}>🧑 Bruno Alves • Matrícula 00123</Text>
+      </View>
 
-        {/* Status Atual */}
+      <View style={styles.container}>
+        {/* Progresso */}
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>Status Atual</Text>
-
-          <View style={styles.faixaStatusContainer}>
-            <View style={styles.iconBox}>
-              <Text style={styles.icon}>🎖️</Text>
-            </View>
-
-            <View style={styles.textBox}>
-              <Text style={styles.faixaStatusTitulo}>
-                Faixa {faixaAtual.faixa} – {faixaAtual.grau}º grau
-              </Text>
-              <Text style={styles.faixaStatusData}>
-                Desde {new Date(faixaAtual.desde).toLocaleDateString('pt-BR')}
-              </Text>
-            </View>
-          </View>
-
-          <View style={{ marginTop: 12 }}>
-            <FaixaComGraus faixa={faixaAtual.faixa} grau={faixaAtual.grau} />
-          </View>
-
+          <Text style={styles.sectionTitle}>Progresso para próxima graduação</Text>
           <View style={styles.progressoBarLabel}>
             <Text style={styles.progressoTexto}>Próxima graduação</Text>
             <Text style={styles.progressoTexto}>{progresso.percentual}%</Text>
@@ -131,83 +78,61 @@ export default function EvolucaoScreen() {
           </View>
         </View>
 
-        
-        {/* Histórico de Graduações */}
+        {/* Histórico */}
         <View style={styles.card}>
           <Text style={styles.sectionTitle}>Histórico de Graduações</Text>
           <View style={styles.timelineWrapper}>
             {historico.map((item) => (
               <View key={item.id} style={styles.timelineRow}>
                 <View style={styles.timelineIconColumn}>
-  <View style={styles.timelineLineTop} />
-  <TimelineBullet type={item.tipo === 'graduacao' ? 'grad' : 'step'} />
-  <View style={styles.timelineLineBottom} />
+                  <View style={styles.timelineLineTop} />
+                  <TimelineBullet type={item.tipo === 'graduacao' ? 'grad' : 'step'} />
+                  <View style={styles.timelineLineBottom} />
                 </View>
-                <View style={[styles.timelineContent, item.tipo === 'graduacao' && styles.graduacaoHighlight]}>
+                <View style={styles.timelineContent}>
                   <FaixaComGraus faixa={item.faixa} grau={item.grau} />
-                  <View style={{ marginTop: 6 }}>
-                    <Text style={styles.timelineText}>
-                      {item.tipo === 'graduacao'
-                        ? `Graduação • Faixa ${item.faixa}`
-                        : `Faixa ${item.faixa} – ${item.grau}º grau`}
-                    </Text>
-                    <Text style={styles.timelineDate}>
-                      {item.data} • {item.professor}
-                    </Text>
-                  </View>
+                  <Text style={styles.timelineText}>
+                    {item.tipo === 'graduacao'
+                      ? `Graduação • Faixa ${item.faixa}`
+                      : `Faixa ${item.faixa} – ${item.grau}º grau`}
+                  </Text>
+                  <Text style={styles.timelineDate}>
+                    {item.data} • {item.professor}
+                  </Text>
                 </View>
               </View>
             ))}
           </View>
         </View>
-
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+    </AppLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: '#111' },
+  topo: {
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  faixaAtual: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 6,
+  },
+  detalhe: {
+    fontSize: 13,
+    color: '#ccc',
+    marginTop: 2,
+  },
   container: { padding: 16, paddingBottom: 64 },
-  title: { fontSize: 24, color: '#fff', fontWeight: 'bold', marginBottom: 16 },
+  title: { fontSize: 22, color: '#fff', fontWeight: 'bold', marginBottom: 16, textAlign: 'center' },
   sectionTitle: { fontSize: 16, color: '#ccc', marginBottom: 12 },
   card: {
     backgroundColor: '#1D1D1D',
     padding: 16,
     borderRadius: 10,
-    marginBottom: 16,
-  },
-
-  // Faixa atual
-  faixaStatusContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  iconBox: {
-    width: 42,
-    height: 42,
-    backgroundColor: '#1E88E5',
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  icon: {
-    fontSize: 20,
-    color: '#fff',
-  },
-  textBox: {
-    flex: 1,
-  },
-  faixaStatusTitulo: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  faixaStatusData: {
-    color: '#ccc',
-    fontSize: 13,
-    marginTop: 2,
+    marginBottom: 20,
   },
   progressoBarLabel: {
     marginTop: 12,
@@ -229,8 +154,6 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#1E88E5',
   },
-
-  // Estatísticas
   statsRow: {
     flexDirection: 'row',
     gap: 12,
@@ -253,43 +176,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
-
-  // Timeline
   timelineWrapper: {
-    position: 'relative',
-    paddingLeft: 28,
     paddingTop: 8,
     paddingBottom: 8,
   },
-  verticalLine: {
-    position: 'absolute',
-    left: 14,
-    top: 14,
-    bottom: 0,
-    width: 2,
-    backgroundColor: '#555',
-  },
-  timelineItem: {
-    marginBottom: 32,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 12,
-  },
-  timelineContent: {
-    flex: 1,
-    paddingLeft: 4,
-  },
-  timelineText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  timelineDate: {
-    color: '#aaa',
-    fontSize: 13,
-    marginTop: 2,
-  },
-
   timelineRow: {
     flexDirection: 'row',
     marginBottom: 36,
@@ -311,22 +201,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#555',
     marginTop: 20,
   },
-  timelineLineBottom: {
-    flex: 1,
-    width: 2,
-    backgroundColor: '#555',
-    marginTop: 20,
-  },
-  timelineLine: {
-    marginTop: 6,
-    flex: 1,
-    width: 2,
-    backgroundColor: '#555',
-    marginTop: 4,
-  },
   timelineContent: {
     flex: 1,
-    paddingLeft: 4,
+    paddingLeft: 8,
   },
-
+  timelineText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 6,
+  },
+  timelineDate: {
+    color: '#aaa',
+    fontSize: 13,
+    marginTop: 2,
+  },
 });

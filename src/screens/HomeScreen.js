@@ -24,7 +24,6 @@ const HomeScreen = () => {
 
   return (
     <AppLayout>
-      <ScrollView style={{ flex: 1, backgroundColor: colors.background }}>
         {/* TOPO DO PERFIL */}
         <TopoPerfil {...userMock} />
 
@@ -100,7 +99,6 @@ const HomeScreen = () => {
             </View>
           </View>
         </View>
-      </ScrollView>
     </AppLayout>
   );
 };
