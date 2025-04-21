@@ -1,32 +1,39 @@
 import React from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
-import Header from './Header';
+import {
+  View,
+  ScrollView,
+  SafeAreaView,
+  StyleSheet,
+  Platform,
+} from 'react-native';
+import { useTheme } from '../contexts/ThemeContext';
+import { StatusBar } from 'expo-status-bar';
 
-const AppLayout = ({ children }) => {
+const AppLayout = ({ children, scrollable = true, style }) => {
+  const { colors, isDark } = useTheme();
+  const Container = scrollable ? ScrollView : View;
+
   return (
-    <View style={styles.container}>
-      <Header />
-      <ScrollView
-        style={styles.scroll}
+    <SafeAreaView style={[styles.safe, { backgroundColor: colors.background }]}>
+      <StatusBar style={isDark ? 'light' : 'dark'} />
+      <Container
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
+        contentContainerStyle={[styles.content, style]}
       >
         {children}
-      </ScrollView>
-    </View>
+      </Container>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#171717', // fundo escuro padrão
-  },
-  scroll: {
+  safe: {
     flex: 1,
   },
   content: {
-    paddingBottom: 32,
+    paddingHorizontal: 4,
+    paddingBottom: Platform.OS === 'ios' ? 100 : 80,
+    flexGrow: 1,
   },
 });
 

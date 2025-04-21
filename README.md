@@ -14,12 +14,6 @@
 
 ---
 
-## ✅ Versão Atual: `v1.0.7`
-
-Fluxo completo de login e cadastro 100% funcional com autenticação JWT, animações de sucesso e redirecionamentos resetados com histórico limpo.
-
----
-
 ## 🖼️ Preview da Interface
 
 <div align="center">
@@ -40,9 +34,16 @@ Fluxo completo de login e cadastro 100% funcional com autenticação JWT, anima�
 
 ---
 
-## ✅ Versão Atual: `v1.0.8`
+## ✅ Versão Atual: `1.2.0`
 
-Autenticação completa com login e logout funcional via JWT. Contexto de usuário com persistência automática, navegação global, animações de sucesso e tela de configurações com troca de tema e botão de logout.
+### Mudanças principais:
+
+- Estrutura limpa com AppLayout único
+- Resolução do bug de espaçamento entre tela e Tab Bar
+- `ScreenContainer` com `paddingHorizontal: 4` para alinhamento lateral
+- Scroll e layout testados com Safe Area + TabBar
+- Ícones da TabBar atualizados (estilo WhatsApp/Nubank)
+- Responsividade básica ativada para tablets
 
 ---
 
@@ -59,6 +60,13 @@ Estas são as funcionalidades já implementadas até a versão `v1.0.8`:
 - ✅ Toasts de erro e sucesso com feedback visual elegante
 - ✅ Tela de configurações com troca de tema (escuro/claro) e logout
 - ✅ Estrutura modular com `AuthStack`, `MainTabs` e `AppNavigator`
+
+## 🚀 Próximos passos
+
+- Upload de foto (perfil/capa) com Supabase Storage
+- Graduação real via backend
+- Tela "Mais" com funções administrativas
+- Melhorias de acessibilidade (a11y)
 
 ---
 

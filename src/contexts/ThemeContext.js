@@ -1,27 +1,28 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Appearance } from 'react-native';
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const systemTheme = Appearance.getColorScheme();
-  const [theme, setTheme] = useState('dark'); // padrão: dark
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  const [theme, setTheme] = useState(systemTheme || 'light');
 
   const isDarkMode = theme === 'dark';
 
   const colors = {
-    background: isDarkMode ? '#000000' : '#ffffff',
-    text: isDarkMode ? '#ffffff' : '#000000',
+    background: isDarkMode ? '#000' : '#fff',
+    text: isDarkMode ? '#fff' : '#000',
     card: isDarkMode ? '#1e1e1e' : '#f5f5f5',
-    subtext: isDarkMode ? '#aaaaaa' : '#444444',
+    subtext: isDarkMode ? '#aaa' : '#444',
+    primary: '#69db7c',
+  };
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, colors, isDarkMode }}>
+    <ThemeContext.Provider value={{ theme, colors, isDark: isDarkMode, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

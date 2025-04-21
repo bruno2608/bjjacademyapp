@@ -5,6 +5,7 @@ import AuthStack from './AuthStack';
 import MainTabs from './MainTabs';
 import { useUserContext } from '../contexts/UserContext';
 import SuccessScreen from '../screens/SuccessScreen';
+import GraduacoesDoDiaScreen from '../screens/GraduacoesDoDiaScreen';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ const AppNavigator = () => {
         <>
           <Stack.Screen name="MainTabs" component={MainTabs} />
           <Stack.Screen name="Success" component={SuccessScreen} />
+          <Stack.Screen name="GraduacoesDoDia" component={GraduacoesDoDiaScreen} /> 
         </>
       )}
     </Stack.Navigator>

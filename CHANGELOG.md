@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.0](https://github.com/bruno2608/bjjacademyapp/compare/v1.0.10...v1.2.0) (2025-04-20)
+
+#### ✨ Melhorias visuais
+- Ajustado `paddingHorizontal` global via `AppLayout` (`16` → `4`) para visual mais justo e moderno
+- Resolvido espaço em branco entre conteúdo e `MainTabs` (`borderTopWidth: 0`)
+- Responsividade lateral refinada para todos os blocos da `HomeScreen`
+- Aplicado visual padrão com TabBar azul clara `#4dabf7`
+
+#### 🧭 Navegação
+- Criado `HomeStack.js` e integrado à `MainTabs` para manter a `TabBar` visível ao navegar
+- Adicionada navegação entre `HomeScreen` e `GraduacoesDoDiaScreen` mantendo histórico e estrutura limpa
+- Corrigido erro de scroll duplo removendo `ScrollView` e `ScreenContainer` onde necessário
+
+#### 🧩 Componentização e organização
+- Isolado componente `GraduacoesLista.js` com `FlatList` reutilizável
+- Refatorado `AppLayout` com prop `scrollable` e estrutura padronizada
+- Eliminado uso redundante de `ScreenContainer.js` nas telas que usam `AppLayout`
+
+#### 🧠 UX e performance
+- Corrigido erro de `VirtualizedList aninhada`
+- Melhorado uso de ícones com múltiplos conjuntos (`Ionicons`, `MaterialCommunityIcons`) sem warnings
+- Aplicado tema escuro padrão com fundo sólido e contrastes ajustados
+
 ### [1.0.10](https://github.com/bruno2608/bjjacademyapp/compare/v1.0.9...v1.0.10) (2025-04-16)
 
 #### 🛠 Melhorias técnicas
