@@ -34,16 +34,16 @@
 
 ---
 
-## ✅ Versão Atual: `1.2.0`
+## ✅ Versão Atual: `1.3.0`
 
-### Mudanças principais:
+### Mudanças principais na `v1.3.0`:
 
-- Estrutura limpa com AppLayout único
-- Resolução do bug de espaçamento entre tela e Tab Bar
-- `ScreenContainer` com `paddingHorizontal: 4` para alinhamento lateral
-- Scroll e layout testados com Safe Area + TabBar
-- Ícones da TabBar atualizados (estilo WhatsApp/Nubank)
-- Responsividade básica ativada para tablets
+- Validação visual com bordas vermelhas em campos obrigatórios (Login e Cadastro)
+- Feedback direto nos inputs em vez de apenas toast
+- Checkbox de aceite dos termos com `Ionicons` (removido `@react-native-community/checkbox`)
+- Correções de contraste nos textos: “Ao continuar...” e “Já tem uma conta?”
+- Eliminação do uso de `colors` dentro de `StyleSheet.create`
+- Preparado para compatibilidade com Bridgeless Mode do React Native 0.77+
 
 ---
 

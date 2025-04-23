@@ -28,7 +28,7 @@ const HomeScreen = () => {
 
   const graduacoesHoje = [
     { id: '1', nome: 'João', grau: 1 },
-    { id: '2', nome: 'Maria', grau: 2 },
+    { id: '2', nome: 'Maria', grau: 4 },
   ];
 
   return (
