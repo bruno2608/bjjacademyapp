@@ -2,6 +2,56 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.3.1](https://github.com/bruno2608/bjjacademyapp/compare/v1.2.0...v1.3.1) (2025-04-23)
+
+#### ✨ Funcionalidades e melhorias visuais
+- Tema escuro ativado por padrão em todas as telas principais
+- Corrigida tela `SuccessScreen` com suporte dinâmico ao tema
+- Textos, inputs e botões atualizados para contraste ideal
+- Novo `ThemeContext` com `colors.text`, `colors.background`, `colors.primary`
+- Ajuste visual nas telas de login e cadastro com validação direta nos campos
+
+#### 🧭 Navegação
+- Navegação global com `navigationRef.resetTo()` validada em login e cadastro
+- Retorno automático à tela de login após cadastro via tela de sucesso
+- Estrutura de animação de fundo aplicada com Lottie (versão leve `star_glow.json`)
+
+#### 🔐 Validações e UX
+- Checkbox de aceite dos termos agora é obrigatório no cadastro
+- Campos inválidos (senha, confirmação, email) com borda vermelha
+- Toasts de erro exibidos com `react-native-toast-message`
+- Inclusão de campo "confirmar senha" e botão "mostrar senha" nos dois inputs
+- Separador visual `"--- ou ---"` melhorado com contraste e alinhamento
+
+#### 🧪 Estrutura
+- Telas ajustadas: `WelcomeScreen`, `LoginScreen`, `CadastroScreen`, `SuccessScreen`
+- Refatoração da estrutura de contexto e navegação
+- Versão `expo` atualizada e instalação do novo CLI
+
+
+### [1.3.0](https://github.com/bruno2608/bjjacademyapp/compare/v1.2.0...v1.3.0) (2025-04-22)
+
+#### ✨ Validação visual aprimorada
+- Aplicada validação visual com **bordas vermelhas em campos obrigatórios** nas telas de Cadastro e Login
+- Erros de campos agora são destacados diretamente nos inputs, sem dependência exclusiva de toasts
+
+#### 🛠️ Refatoração de temas
+- Todos os estilos de `colors.text`, `colors.card`, etc. migrados para **uso inline no JSX**
+- Eliminação total de referências dinâmicas dentro do `StyleSheet.create`, evitando erros em `Bridgeless Mode`
+- Estilo unificado para `dividerText`, checkbox e links com base no tema ativo
+
+#### 🔐 Checkbox e aceite de termos
+- Campo de aceite dos **Termos de Uso** com validação visual obrigatória no cadastro
+- Link dinâmico e clicável para os termos hospedado via Supabase
+
+#### 🧼 Acessibilidade e contraste
+- Melhorado contraste dos textos **“Ao continuar…”** e **“Já tem uma conta?”**
+- Corrigido alinhamento vertical e visual do checkbox com o texto
+
 ### [1.2.0](https://github.com/bruno2608/bjjacademyapp/compare/v1.0.10...v1.2.0) (2025-04-20)
 
 #### ✨ Melhorias visuais

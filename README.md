@@ -34,16 +34,15 @@
 
 ---
 
-## ✅ Versão Atual: `1.2.0`
+## ✅ Versão Atual: `1.3.1`
 
 ### Mudanças principais:
 
-- Estrutura limpa com AppLayout único
-- Resolução do bug de espaçamento entre tela e Tab Bar
-- `ScreenContainer` com `paddingHorizontal: 4` para alinhamento lateral
-- Scroll e layout testados com Safe Area + TabBar
-- Ícones da TabBar atualizados (estilo WhatsApp/Nubank)
-- Responsividade básica ativada para tablets
+- Dark mode padrão e responsivo
+- Validação visual direta nos campos de login e cadastro
+- Tela de sucesso adaptada ao tema e animações centralizadas
+- Navegação com `navigationRef.resetTo()` funcionando em todos os fluxos
+
 
 ---
 
@@ -51,15 +50,14 @@
 
 Estas são as funcionalidades já implementadas até a versão `v1.0.8`:
 
-- ✅ Login via API com JWT, animação e redirecionamento com `resetTo`
-- ✅ Cadastro com código de convite e retorno automático ao login
-- ✅ Tela de sucesso reutilizável com animação e controle de destino
-- ✅ Contexto global persistente com `AsyncStorage`
-- ✅ Logout funcional com reset automático para o AuthStack
-- ✅ Navegação global via `navigationRef`
-- ✅ Toasts de erro e sucesso com feedback visual elegante
-- ✅ Tela de configurações com troca de tema (escuro/claro) e logout
-- ✅ Estrutura modular com `AuthStack`, `MainTabs` e `AppNavigator`
+- ✅ Login funcional com JWT, redirecionamento e feedback visual
+- ✅ Cadastro com validações, código de convite e checkbox obrigatório
+- ✅ Animações com Lottie (boas-vindas e sucesso)
+- ✅ `SuccessScreen` adaptada ao tema e reutilizável com contexto
+- ✅ Toasts de erro com `react-native-toast-message`
+- ✅ Inputs com ícones e botão "mostrar senha" integrados
+- ✅ Estrutura modular e pronta para novos fluxos por perfil
+
 
 ## 🚀 Próximos passos
 
