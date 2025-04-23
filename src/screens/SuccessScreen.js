@@ -6,7 +6,7 @@ import { useRoute } from '@react-navigation/native';
 import { navigateTo, resetTo } from '../navigation/navigationRef';
 
 const SuccessScreen = () => {
-  const theme = useTheme();
+  const { colors } = useTheme();
   const route = useRoute();
 
   const {
@@ -44,16 +44,16 @@ const SuccessScreen = () => {
   }, [autoRedirect, nextScreen, reset, delay]);
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <LottieView
         source={animation}
         autoPlay
         loop={false}
         style={styles.animation}
       />
-      <Text style={[styles.title, { color: theme.text }]}>{title}</Text>
+      <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
       {message ? (
-        <Text style={[styles.message, { color: theme.subtext }]}>{message}</Text>
+        <Text style={[styles.message, { color: colors.subtext }]}>{message}</Text>
       ) : null}
     </View>
   );
