@@ -34,7 +34,7 @@
 
 ---
 
-## ✅ Versão Atual: `1.3.1`
+## ✅ Versão Atual: `1.4.0`
 
 ### Mudanças principais:
 
@@ -48,7 +48,7 @@
 
 ## 🔐 Funcionalidades Atuais
 
-Estas são as funcionalidades já implementadas até a versão `v1.0.8`:
+Estas são as funcionalidades já implementadas até a versão `1.4.0`:
 
 - ✅ Login funcional com JWT, redirecionamento e feedback visual
 - ✅ Cadastro com validações, código de convite e checkbox obrigatório
@@ -57,10 +57,13 @@ Estas são as funcionalidades já implementadas até a versão `v1.0.8`:
 - ✅ Toasts de erro com `react-native-toast-message`
 - ✅ Inputs com ícones e botão "mostrar senha" integrados
 - ✅ Estrutura modular e pronta para novos fluxos por perfil
+- ✅ Fluxo completo de redefinição de senha com validação e feedback
+- ✅ Tela de informações complementares após cadastro
 
 
 ## 🚀 Próximos passos
 
+- Tela de informações complementares após cadastro
 - Upload de foto (perfil/capa) com Supabase Storage
 - Graduação real via backend
 - Tela "Mais" com funções administrativas

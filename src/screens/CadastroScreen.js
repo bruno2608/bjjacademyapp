@@ -149,7 +149,7 @@ export default function CadastroScreen() {
 
                 <TouchableOpacity onPress={() => resetTo('Login')} style={{ marginTop: 24 }}>
                 <Text style={{ fontSize: 14, textAlign: 'center', color: colors.text }}>
-                  Já tem uma conta? <Text style={{ color: '#1877F2', fontWeight: 'bold' }}>Fazer login</Text>
+                  Já tem uma conta? <Text style={{ color: '#1877F2', fontWeight: 'bold' }}>Conecte-se</Text>
                 </Text>
                 </TouchableOpacity>
               </View>

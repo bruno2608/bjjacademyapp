@@ -14,6 +14,8 @@ import { useTheme } from '../contexts/ThemeContext';
 import { loginWithApi } from '../services/authService';
 import { useUserContext } from '../contexts/UserContext';
 import { resetTo } from '../navigation/navigationRef';
+import { navigateTo } from '../navigation/navigationRef';
+
 
 export default function LoginScreen() {
   const { colors } = useTheme();
@@ -112,7 +114,7 @@ export default function LoginScreen() {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigateTo('ForgotPassword')}>
               <Text style={[styles.forgotText, { color: colors.text }]}>Esqueci minha senha</Text>
             </TouchableOpacity>
 
@@ -138,7 +140,7 @@ export default function LoginScreen() {
 
             <TouchableOpacity onPress={() => resetTo('Cadastro')}>
               <Text style={[styles.registerText, { color: colors.text }]}>
-                Ainda não tem conta? <Text style={{ color: '#1877F2', fontWeight: 'bold' }}>Criar Conta</Text>
+                Não tem conta? <Text style={{ color: '#1877F2', fontWeight: 'bold' }}>Registrar-se</Text>
               </Text>
             </TouchableOpacity>
           </MotiView>
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 16,
     backgroundColor: '#DB4437',
-    paddingVertical: 12,
+    paddingVertical: 16,
     borderRadius: 100,
   },
   googleText: {

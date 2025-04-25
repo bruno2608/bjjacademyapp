@@ -6,6 +6,26 @@ All notable changes to this project will be documented in this file. See [standa
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.0] (2025-04-24)
+
+#### 🔐 Fluxo de recuperação de senha completo
+- Nova tela `ForgotPasswordScreen` com simulação de envio de código
+- Tela `VerifyCodeScreen` com campos OTP manuais e visual moderno
+- `NewPasswordScreen` com checklist de senha, animação e sucesso
+- Redirecionamento com `SuccessScreen` reutilizável e visual animado
+
+#### 🧍 Cadastro pós-registro
+- Criada tela `ProfileSetupScreen` para dados complementares (telefone, faixa, grau, etc.)
+- Campos validados com uso de `Picker` e integração futura com backend
+- Preparada para alimentar a tela de Evolução do aluno
+
+#### 🧭 Navegação
+- Navegação entre todas as telas com `navigationRef.reset()` ou `.navigate()`
+- Ajustes nas rotas do `AuthStack` para suporte ao novo fluxo
+
+#### 🧪 Telas afetadas:
+- `LoginScreen`, `CadastroScreen`, `SuccessScreen`, `ForgotPasswordScreen`, `VerifyCodeScreen`, `NewPasswordScreen`, `ProfileSetupScreen`
+
 ### [1.3.1](https://github.com/bruno2608/bjjacademyapp/compare/v1.2.0...v1.3.1) (2025-04-23)
 
 #### ✨ Funcionalidades e melhorias visuais
